@@ -2,8 +2,9 @@
 
 using std::cerr;
 using std::endl;
+
 /**
- * checks if the whole input has already been comsumed
+ * @brief checks if the whole input has already been comsumed
  *
  * @return true if the end of input has been reached
  */
@@ -13,7 +14,7 @@ bool Lexer::isAtEnd()
 }
 
 /**
- * peeking the input at curent position without consumtion
+ * @brief peeking the input at curent position without consumtion
  *
  * @return the char at curent position
  */
@@ -23,8 +24,9 @@ char Lexer::peek()
 }
 
 /**
- * consumes the char at 'm_current' and advances to next char
+ * @brief consumes the char at 'm_current' and advances to next char
  *
+ * @return void
  */
 void Lexer::consume()
 {
@@ -59,6 +61,7 @@ size_t Lexer::consumeNumber()
 }
 
 /**
+ * @brief adds a token to the vector of tokens
  *
  * @param type the type of the token
  * @param lexem the lexem of the token
@@ -88,15 +91,27 @@ TokenType Lexer::tokenTypeFor(const char c)
 }
 
 /**
+ * @brief tokenizes the string_view m_input
  *
- * @return a vector of tokens based on the input
+ * @return a vector of tokens based on m_input
  */
 vector<Token> Lexer::getTokens()
 {
-    // TODO: implement tokenizing algorithm
     while (not isAtEnd())
     {
+        const char current_char = peek();
+        if (isdigit(current_char))
+        {
+            size_t num_start = m_current;
+            size_t len_number = consumeNumber();
+            addToken(TokenType::Number, m_input.substr(num_start, len_number));
+            continue;
+        }
+        const TokenType type = tokenTypeFor(current_char);
+        addToken(type, m_input.substr(m_current, 1));
         consume();
     }
-    return m_tokens;
+    addToken(TokenType::EndOfInput, m_input.substr(m_current, 1));
+
+    return std::move(m_tokens);
 }
