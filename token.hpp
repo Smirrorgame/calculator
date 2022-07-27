@@ -48,13 +48,13 @@ struct Token
             return "ASTERISK";
             break;
         case TokenType::ForwardSlash:
-            return "FORWARDSLASH";
+            return "FORWARD_SLASH";
             break;
         case TokenType::LeftParenthesis:
-            return "LEFTPARENTHESIS";
+            return "LEFT_PARENTHESIS";
             break;
         case TokenType::RightParenthesis:
-            return "RIGHTPARENTHESIS";
+            return "RIGHT_PARENTHESIS";
             break;
         case TokenType::Number:
             return "NUMBER";
