@@ -1,5 +1,7 @@
 #include "lexer.hpp"
 
+using std::cerr;
+using std::endl;
 /**
  * checks if the whole input has already been comsumed
  *
@@ -30,7 +32,33 @@ void Lexer::consume()
 }
 
 /**
- * adds a token to the vector of tokens
+ * @brief consumes a given sequence of digits including decimal delimiters
+ *
+ * @return The length of the (decimal) number (amount of digits and decimal delimiters)
+ */
+size_t Lexer::consumeNumber()
+{
+    size_t len = 0;
+    char current_peek = peek();
+    bool is_decimal = false;
+    while (not isAtEnd() and (isdigit(current_peek) or current_peek == '.' or current_peek == ','))
+    {
+        if (is_decimal and (current_peek == '.' or current_peek == ','))
+        {
+            cerr << "Found more than one decimal specifier at position " << m_current << ": '" << current_peek << "'" << endl;
+            exit(EXIT_FAILURE);
+        }
+        if (current_peek == '.' or current_peek == ',')
+            is_decimal = true;
+        ++len;
+        consume();
+        if (not isAtEnd())
+            current_peek = peek();
+    }
+    return len;
+}
+
+/**
  *
  * @param type the type of the token
  * @param lexem the lexem of the token

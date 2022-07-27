@@ -27,6 +27,8 @@ private:
     char peek();
     void consume();
     void addToken(TokenType type, string_view lexem);
+    size_t consumeNumber();
+    TokenType tokenTypeFor(const char c);
 
 public:
     Lexer(string_view input) : m_input{input} {}
