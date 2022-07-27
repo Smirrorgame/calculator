@@ -41,7 +41,25 @@ void Lexer::addToken(TokenType type, string_view lexem)
 }
 
 /**
- * tokenizes the input
+ * @brief returns a TokenType for a given char
+ *
+ * @param c the char to get the right TokenType for
+ * @return TokenType the corresponding TokenType
+ */
+TokenType Lexer::tokenTypeFor(const char c)
+{
+    if (m_lut.find(c) != m_lut.end())
+    {
+        return m_lut.at(c);
+    }
+    else
+    {
+        cerr << "unknown specifier at " << m_current << ": '" << c << "'" << endl;
+        exit(EXIT_FAILURE);
+    }
+}
+
+/**
  *
  * @return a vector of tokens based on the input
  */
