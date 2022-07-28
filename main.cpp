@@ -1,5 +1,7 @@
 #include <iostream>
 #include "lexer.hpp"
+#include "parser.hpp"
+#include "calc.hpp"
 
 using namespace std;
 int main()
@@ -7,16 +9,16 @@ int main()
     system("clear");
     cout << "Welcome to the calculator!" << endl;
     // TODO: Just for testing -> later read from std::cin
-    std::string in = "42.5+0.5-1";
-    cout << "The input is: " << endl
-         << in << endl
+    std::string in = "3*(1.5+1,5)";
+    cout << "The input was: " << endl
+         << in
          << endl;
     Lexer l{in};
     vector<Token> tokens = l.getTokens();
+    Parser p{tokens};
+    Node *root = p.parse();
+    double result = calc(root);
+    cout << "=" << result << endl;
 
-    for (Token t : tokens)
-    {
-        cout << "Token: " << t.to_string() << ", lexem : '" << t.lexem << "'" << endl;
-    }
     return EXIT_SUCCESS;
 }
