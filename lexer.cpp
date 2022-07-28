@@ -100,6 +100,10 @@ vector<Token> Lexer::getTokens()
     while (not isAtEnd())
     {
         const char current_char = peek();
+        if (m_tokens.size() > 0 and m_tokens.at(m_tokens.size() - 1).type == TokenType::RightParenthesis and isdigit(current_char))
+        {
+            addToken(TokenType::Asterisk, "*");
+        }
         if (isdigit(current_char))
         {
             size_t num_start = m_current;
@@ -108,6 +112,10 @@ vector<Token> Lexer::getTokens()
             continue;
         }
         const TokenType type = tokenTypeFor(current_char);
+        if (m_tokens.size() > 0 and m_tokens.at(m_tokens.size() - 1).type == TokenType::Number and type == TokenType::LeftParenthesis)
+        {
+            addToken(TokenType::Asterisk, "*");
+        }
         addToken(type, m_input.substr(m_current, 1));
         consume();
     }

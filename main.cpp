@@ -9,7 +9,7 @@ int main()
     system("clear");
     cout << "Welcome to the calculator!" << endl;
     // TODO: Just for testing -> later read from std::cin
-    std::string in = "3*(1.5+1,5)";
+    std::string in = "2(1.5+1,5)2";
     cout << "The input was: " << endl
          << in
          << endl;

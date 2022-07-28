@@ -8,12 +8,11 @@ The input runs through following pipeline:
 3. Execution of the calculation based on the AST
 
 The Calculator supports following:
-- Integers
-- Decimals (indicated with '.' or ',')
-- Addition
-- Subtraction
-- Multiplication
-- Division
-- Parenthesis arithmetic
-
-For Parenthesis there's no implicit multiplication, so you need to write an asterisk: Write `3*(2+1)` instead of `3(2+1)`
+- [x] Integers
+- [x] Decimals (indicated with '.' or ',')
+- [x] Addition
+- [x] Subtraction
+- [x] Multiplication
+- [x] Division
+- [x] Parenthesis arithmetic
+- [x] implicit multiplication: instead of `3*(2+1)` you can also write `3(2+1)` or `(2+1)3`
