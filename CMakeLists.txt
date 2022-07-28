@@ -16,7 +16,7 @@ endif()
 set(TARGET_LIST
 	${CMAKE_PROJECT_NAME}
 )
-add_executable(${CMAKE_PROJECT_NAME} main.cpp token.hpp lexer.hpp lexer.cpp)
+add_executable(${CMAKE_PROJECT_NAME} main.cpp token.hpp lexer.hpp lexer.cpp ast.hpp parser.hpp parser.cpp)
 
 
 foreach (target ${TARGET_LIST})
