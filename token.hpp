@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string_view>
+#include <algorithm>
 #include <iostream>
 
 enum class TokenType
@@ -31,7 +32,9 @@ struct Token
             std::cerr << "Should throw an Exception later!!" << std::endl;
             exit(EXIT_FAILURE);
         }
-        return std::stod(lexem.data());
+        std::string s = lexem.data();
+        std::replace(s.begin(), s.end(), ',', '.');
+        return std::stod(s);
     }
 
     std::string to_string() const
